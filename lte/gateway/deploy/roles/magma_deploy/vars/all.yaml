@@ -14,7 +14,7 @@
 magma_pkgrepo_proto: https
 magma_pkgrepo_host: linuxfoundation.jfrog.io/artifactory/magma-packages
 magma_pkgrepo_path: ""
-magma_pkgrepo_dist: focal-1.7.0
+magma_pkgrepo_dist: focal-1.9.0
 magma_pkgrepo_component: main
 magma_pkgrepo_name: "magma"
 
