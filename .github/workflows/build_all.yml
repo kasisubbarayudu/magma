@@ -28,7 +28,7 @@ on:
     types: [ opened, reopened, synchronize ]
 jobs:
   build_publish_helm_charts:
-    if: github.repository_owner == 'magma'
+    
     env:
       HELM_CHART_ARTIFACTORY_URL: "https://linuxfoundation.jfrog.io/artifactory/"
       HELM_CHART_MUSEUM_REPO: magma-helm-test
@@ -37,7 +37,7 @@ jobs:
       MAGMA_ROOT: "${{ github.workspace }}"
       EVENT_NAME: "${{ github.event_name }}"
       ISSUE_NUMBER: "${{ github.event.number }}"
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, ubuntu-20.04]
     steps:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # pin@v3.1.0
       # Version is github job run number when running on master
@@ -111,7 +111,7 @@ jobs:
     uses: ./.github/workflows/bazel.yml
     secrets: inherit
   orc8r-build:
-    if: github.repository_owner == 'magma'
+    
     name: orc8r build job
     runs-on: ubuntu-20.04
     outputs:
@@ -212,7 +212,7 @@ jobs:
           SLACK_COLOR: "#00FF00"
           SLACK_FOOTER: ' '
   cwag-deploy:
-    if: github.repository_owner == 'magma'
+    
     name: cwag deploy job
     runs-on: ubuntu-20.04
     outputs:
@@ -306,7 +306,7 @@ jobs:
           SLACK_COLOR: "#00FF00"
           SLACK_FOOTER: ' '
   cwf-operator-build:
-    if: github.repository_owner == 'magma'
+    
     name: cwf operator build job
     runs-on: ubuntu-20.04
     env:
@@ -372,7 +372,7 @@ jobs:
           SLACK_COLOR: "#00FF00"
           SLACK_FOOTER: ''
   feg-build:
-    if: github.repository_owner == 'magma'
+    
     runs-on: ubuntu-20.04
     outputs:
       artifacts: ${{ steps.publish_artifacts.outputs.artifacts }}
@@ -451,7 +451,7 @@ jobs:
           SLACK_COLOR: "#00FF00"
           SLACK_FOOTER: ' '
   nms-build:
-    if: github.repository_owner == 'magma'
+    
     name: nms-build job
     runs-on: ubuntu-20.04
     outputs:
@@ -546,7 +546,7 @@ jobs:
           pip3 install pyrebase4
           python ci-scripts/firebase_publish.py
   domain-proxy-build:
-    if: github.repository_owner == 'magma'
+    
     name: domain proxy build job
     runs-on: ubuntu-20.04
     outputs:
