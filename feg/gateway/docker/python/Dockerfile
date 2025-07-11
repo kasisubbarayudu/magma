@@ -117,13 +117,11 @@ RUN apt-get -y update && apt-get -y install \
     td-agent-bit
 
 # Install docker.
-RUN  apt-get update && apt-get install -y \
-      docker-ce \
-      docker-ce-cli \
-      containerd.io \
-      docker-compose-plugin \
-      docker-ce-rootless-extras \
-      docker-buildx-plugin
+# The below sed removes the docker-model-plugin package from the script. This is a temporary fix to make the workflow work.
+# TODO: Remove the sed command
+RUN curl -sSL https://get.docker.com/ > /tmp/get_docker.sh && sed -i 's/docker-model-plugin//g' /tmp/get_docker.sh && \
+    sh /tmp/get_docker.sh && \
+    rm /tmp/get_docker.sh
 
 # Copy the build artifacts.
 COPY --from=builder /magma/bazel-bin/lte/gateway/release/feg_python_executables.tar.gz \
