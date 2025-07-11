@@ -117,9 +117,13 @@ RUN apt-get -y update && apt-get -y install \
     td-agent-bit
 
 # Install docker.
-RUN curl -sSL https://get.docker.com/ > /tmp/get_docker.sh && \
-    sh /tmp/get_docker.sh && \
-    rm /tmp/get_docker.sh
+RUN  apt-get update && apt-get install -y \
+      docker-ce \
+      docker-ce-cli \
+      containerd.io \
+      docker-compose-plugin \
+      docker-ce-rootless-extras \
+      docker-buildx-plugin
 
 # Copy the build artifacts.
 COPY --from=builder /magma/bazel-bin/lte/gateway/release/feg_python_executables.tar.gz \
